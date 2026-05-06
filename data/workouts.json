@@ -1,0 +1,67 @@
+{
+  "Jasquared7": [
+    {
+      "exercise_name": "Chest Fly",
+      "date": "06/05/2026 16:30",
+      "sets": [
+        {
+          "reps": 12,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 5,
+          "weight_kg": 73.0,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "06/05/2026 16:31",
+      "sets": [
+        {
+          "reps": 8,
+          "weight_kg": 80.0,
+          "completed": false
+        },
+        {
+          "reps": 8,
+          "weight_kg": 77.0,
+          "completed": false
+        },
+        {
+          "reps": 8,
+          "weight_kg": 77.0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "06/05/2026 16:32",
+      "sets": [
+        {
+          "reps": 10,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 10,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 77.0,
+          "completed": true
+        }
+      ]
+    }
+  ]
+}
