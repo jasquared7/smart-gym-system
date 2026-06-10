@@ -5,6 +5,14 @@ import matplotlib.dates as mdates
 from datetime import datetime
 from src.tracker.workout import Workout
 
+def _parse_date(date_str: str) -> datetime:
+    """Parse a date string in either supported format."""
+    for fmt in ("%d/%m/%Y %H:%M", "%Y-%m-%d %H:%M"):
+        try:
+            return datetime.strptime(date_str, fmt)
+        except ValueError:
+            continue
+    raise ValueError(f"Unrecognised date format: '{date_str}'")
 
 # Where all chart images will be saved
 REPORTS_DIR = "reports"
@@ -22,7 +30,7 @@ def build_dataframe(workouts: list[Workout]) -> pd.DataFrame:
 
     for workout in workouts:
         rows.append({
-            "date": datetime.strptime(workout.date, "%d/%m/%Y %H:%M"),
+            "date": _parse_date(workout.date),
             # strptime = "string parse time" — converts text into a datetime object
             # the format string must match exactly how date was saved in workout.py
             "exercise": workout.exercise_name,
@@ -107,7 +115,7 @@ def plot_weight_progression(workouts: list[Workout], exercise_name: str) -> str:
         )
 
     # Format the x-axis to show dates nicely
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d/%m/%Y"))
     plt.xticks(rotation=45)  # tilt labels so they don't overlap
 
     # Labels, title, legend
@@ -154,7 +162,7 @@ def plot_volume_over_time(workouts: list[Workout]) -> str:
 
     # Group by date and sum the volume — one bar per session
     # .dt.date extracts just the date part (no time) for grouping
-    df["day"] = df["date"].dt.date
+    df["day"] = df["date"].dt.strftime("%d/%m/%Y")
     daily_volume = df.groupby("day")["total_volume"].sum().reset_index()
 
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -186,7 +194,7 @@ def plot_volume_over_time(workouts: list[Workout]) -> str:
     # Set x-axis tick labels to dates
     ax.set_xticks(range(len(daily_volume)))
     ax.set_xticklabels(
-        [str(d) for d in daily_volume["day"]],
+        daily_volume["day"].tolist(),
         rotation=45, ha="right"
     )
 

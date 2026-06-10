@@ -1,5 +1,17 @@
 from datetime import datetime
 
+def _normalise_date(date_str: str) -> str:
+    """
+    Accepts dates in either old format (YYYY-MM-DD HH:MM)
+    or new format (DD/MM/YYYY HH:MM) and always returns
+    the new format. To handle existing saved data.
+    """
+    for fmt in ("%d/%m/%Y %H:%M", "%Y-%m-%d %H:%M"):
+        try:
+            return datetime.strptime(date_str, fmt).strftime("%d/%m/%Y %H:%M")
+        except ValueError:
+            continue
+    return date_str  # fallback: return as-is if neither format matches
 
 class Set:
     """
@@ -83,7 +95,7 @@ class Workout:
         """Rebuild a Workout object from a saved dictionary."""
         sets = [Set.from_dict(s) for s in data["sets"]]
         workout = cls(exercise_name=data["exercise_name"], sets=sets)
-        workout.date = data["date"]  # restore the original date, not the current time 
+        workout.date = _normalise_date(data["date"])  # restore the original date, not the current time 
         return workout
 
     def __str__(self):
