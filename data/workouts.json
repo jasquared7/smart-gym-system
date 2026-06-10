@@ -193,6 +193,33 @@
           "completed": true
         }
       ]
+    },
+    {
+      "exercise_name": "Pull Ups",
+      "date": "10/06/2026 17:40",
+      "sets": [
+        {
+          "reps": 10,
+          "weight_kg": 63.0,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "10/06/2026 17:48",
+      "sets": [
+        {
+          "reps": 8,
+          "weight_kg": 93.0,
+          "completed": false
+        },
+        {
+          "reps": 10,
+          "weight_kg": 86.0,
+          "completed": false
+        }
+      ]
     }
   ]
 }
