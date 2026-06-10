@@ -62,6 +62,137 @@
           "completed": true
         }
       ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "07/05/2026 19:10",
+      "sets": [
+        {
+          "reps": 10,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 10,
+          "weight_kg": 77.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 66.0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "07/05/2026 19:11",
+      "sets": [
+        {
+          "reps": 8,
+          "weight_kg": 86.0,
+          "completed": false
+        },
+        {
+          "reps": 10,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 77.0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "07/05/2026 19:11",
+      "sets": [
+        {
+          "reps": 8,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 86.0,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "07/05/2026 19:12",
+      "sets": [
+        {
+          "reps": 10,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 6,
+          "weight_kg": 86.0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "exercise_name": "Chest Fly",
+      "date": "07/05/2026 19:13",
+      "sets": [
+        {
+          "reps": 12,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 12,
+          "weight_kg": 86.0,
+          "completed": true
+        },
+        {
+          "reps": 12,
+          "weight_kg": 86.0,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "exercise_name": "Bench Press",
+      "date": "10/06/2026 17:16",
+      "sets": [
+        {
+          "reps": 12,
+          "weight_kg": 40.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 50.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 50.0,
+          "completed": true
+        },
+        {
+          "reps": 8,
+          "weight_kg": 50.0,
+          "completed": true
+        }
+      ]
     }
   ]
 }
