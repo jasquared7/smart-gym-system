@@ -1,10 +1,10 @@
+from src.visualiser.summary import generate_weekly_summary, display_personal_records
+from src.utils.helpers import save_workouts, load_workouts, export_to_csv
 from colorama import Fore, Style, init
 from src.tracker.user import User
 from src.tracker.workout import Workout, Set
 from src.tracker.progression import ProgressionEngine
-from src.utils.helpers import save_workouts, load_workouts
 from src.visualiser.charts import plot_weight_progression, plot_volume_over_time
-from src.visualiser.summary import generate_weekly_summary
 
 init(autoreset=True)
 
@@ -78,7 +78,6 @@ def view_history(user: User):
 
 
 def visualise_menu(user: User):
-    """Sub-menu for all visualisation options."""
     if not user.workout_history:
         print(Fore.YELLOW + "\nNo workouts logged yet — nothing to visualise.")
         return
@@ -87,10 +86,12 @@ def visualise_menu(user: User):
     print("1. Weight progression for an exercise")
     print("2. Volume over time (all exercises)")
     print("3. Weekly performance summary")
-    print("4. Back to main menu")
+    print("4. 🏆 Personal records")          # NEW
+    print("5. 📁 Export data to CSV")        # NEW
+    print("6. Back to main menu")
     print("───────────────────────────")
 
-    choice = input("Choose (1-4): ").strip()
+    choice = input("Choose (1-6): ").strip()
 
     if choice == "1":
         exercise = input("Which exercise? ").strip().title()
@@ -109,7 +110,17 @@ def visualise_menu(user: User):
         generate_weekly_summary(user.workout_history)
 
     elif choice == "4":
+        display_personal_records(user.workout_history)   # NEW
+
+    elif choice == "5":                                  # NEW
+        path = export_to_csv(user.name, user.workout_history)
+        if path:
+            print(Fore.GREEN + f"\n✅ Data exported to: {path}")
+            print(Fore.YELLOW + "   Open in Excel or Google Sheets to explore.")
+
+    elif choice == "6":
         return
+
     else:
         print(Fore.RED + "❌ Invalid option.")
 
