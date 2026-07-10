@@ -3,6 +3,45 @@ from colorama import Fore, Style
 from src.tracker.workout import Workout
 from src.visualiser.charts import build_dataframe
 
+def display_personal_records(workouts: list) -> None:
+    """
+    Calculate and display all-time personal records per exercise.
+    A personal record (PR) is the best performance ever recorded.
+    """
+
+    if not workouts:
+        print(Fore.YELLOW + "No workout data available.")
+        return
+
+    df = build_dataframe(workouts)
+
+    if df.empty:
+        return
+
+    print(Fore.CYAN + "\n" + "═" * 50)
+    print(Fore.CYAN + "         🏆 PERSONAL RECORDS")
+    print(Fore.CYAN + "═" * 50)
+
+    # Group by exercise and find the max of each metric
+    # .agg() applies different functions to different columns simultaneously
+    records = df.groupby("exercise").agg(
+        best_weight=("avg_weight", "max"),
+        best_volume=("total_volume", "max"),
+        total_sessions=("exercise", "count"),
+        first_session=("date", "min"),
+        last_session=("date", "max")
+    ).reset_index()
+    # agg() result: one row per exercise, columns named as above
+
+    for _, row in records.iterrows():
+        print(f"\n  {Fore.YELLOW}{row['exercise']}")
+        print(f"    🏋️  Best weight:    {row['best_weight']:.1f} kg")
+        print(f"    📦  Best volume:    {row['best_volume']:,.1f} kg")
+        print(f"    📅  Sessions:       {int(row['total_sessions'])}")
+        print(f"    🗓️  First logged:   {row['first_session'].strftime('%d/%m/%Y')}")
+        print(f"    🗓️  Last logged:    {row['last_session'].strftime('%d/%m/%Y')}")
+
+    print(Fore.CYAN + "\n" + "═" * 50 + "\n")
 
 def generate_weekly_summary(workouts: list[Workout]) -> None:
     """
