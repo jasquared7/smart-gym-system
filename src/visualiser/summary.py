@@ -22,20 +22,25 @@ def display_personal_records(workouts: list) -> None:
     print(Fore.CYAN + "         🏆 PERSONAL RECORDS")
     print(Fore.CYAN + "═" * 50)
 
-    # Group by exercise and find the max of each metric
-    # .agg() applies different functions to different columns simultaneously
+    # Calculate best weight from set-level data directly
+    # avg_weight under-reports when sets have mixed weights
+    best_weights = {}
+    for workout in workouts:
+        for s in workout.sets:
+            exercise = workout.exercise_name
+            if exercise not in best_weights or s.weight > best_weights[exercise]:
+                best_weights[exercise] = s.weight_kg
+
     records = df.groupby("exercise").agg(
-        best_weight=("avg_weight", "max"),
         best_volume=("total_volume", "max"),
         total_sessions=("exercise", "count"),
         first_session=("date", "min"),
         last_session=("date", "max")
     ).reset_index()
-    # agg() result: one row per exercise, columns named as above
 
     for _, row in records.iterrows():
         print(f"\n  {Fore.YELLOW}{row['exercise']}")
-        print(f"    🏋️  Best weight:    {row['best_weight']:.1f} kg")
+        print(f"    🏋️  Best weight:    {best_weights.get(row['exercise'], 0):.1f} kg")
         print(f"    📦  Best volume:    {row['best_volume']:,.1f} kg")
         print(f"    📅  Sessions:       {int(row['total_sessions'])}")
         print(f"    🗓️  First logged:   {row['first_session'].strftime('%d/%m/%Y')}")
