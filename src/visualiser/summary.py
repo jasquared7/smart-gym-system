@@ -28,7 +28,7 @@ def display_personal_records(workouts: list) -> None:
     for workout in workouts:
         for s in workout.sets:
             exercise = workout.exercise_name
-            if exercise not in best_weights or s.weight > best_weights[exercise]:
+            if exercise not in best_weights or s.weight_kg > best_weights[exercise]:
                 best_weights[exercise] = s.weight_kg
 
     records = df.groupby("exercise").agg(
